@@ -18,7 +18,7 @@ class CustomerUserSeeder extends Seeder
             ['email' => 'user@gmail.com'],
             [
                 'name' => 'User',
-                'password' => Hash::make(''),
+                'password' => Hash::make('22222222'),
                 'role' => 'user',
             ]
         );

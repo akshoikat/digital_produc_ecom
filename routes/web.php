@@ -9,11 +9,13 @@ use Illuminate\Support\Facades\Route;
 
 
 use App\Http\Controllers\Admin\BannerController;
+use App\Http\Controllers\Admin\CatagoryController;
 use App\Http\Controllers\Admin\FeatureController;
 use App\Http\Controllers\Admin\GameController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\TranjectionController as AdminTranjection;
 use App\Http\Controllers\Admin\MoneyExchangeController;
+use App\Http\Controllers\TopupController;
 
 Route::get('/',[HomeController::class,'index'])->name('home'); 
 
@@ -32,9 +34,11 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
 
     Route::resource('banners', BannerController::class);
     Route::resource('features', FeatureController::class);
+    Route::resource('catagorys', CatagoryController::class);
     Route::resource('games', GameController::class);
     Route::resource('settings', SettingController::class);
-    Route::resource('tranjection', AdminTranjection::class);
+    Route::resource('transaction', AdminTranjection::class);
+    Route::resource('topups', TopupController::class);
 
 });
 
