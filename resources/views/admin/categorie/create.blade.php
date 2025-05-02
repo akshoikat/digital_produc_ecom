@@ -10,7 +10,7 @@
                     <div class="card-title">Create New Game</div>
                     <hr>
 
-                    <form action="{{ route('catagorys.store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('categories.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <!-- Column 1 -->
@@ -21,10 +21,7 @@
                                 </div>
                                
                           
-                                <div class="form-group">
-                                    <label for="description">Full Description</label>
-                                    <textarea class="form-control form-control-rounded" id="description" name="description" rows="5" placeholder="Enter Description"></textarea>
-                                </div>
+                                
                                 
                             </div>
 

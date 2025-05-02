@@ -29,8 +29,8 @@
         <i class="zmdi zmdi-view-dashboard"></i> <span>Banner</span>
       </a>
     </li>
-    {{-- <li>
-      <a href="{{ route('catagorys.index') }}">
+    <li>
+      <a href="{{ route('categories.index') }}">
         <i class="zmdi zmdi-view-dashboard"></i> <span>Catagory</span>
       </a>
     </li>
@@ -38,7 +38,7 @@
       <a href="{{ route('topups.index') }}">
         <i class="zmdi zmdi-view-dashboard"></i> <span>TopUp</span>
       </a>
-    </li> --}}
+    </li>
      <li>
         <a href="{{ route('games.index') }}">
           <i class="zmdi zmdi-view-dashboard"></i> <span>Game Control</span>

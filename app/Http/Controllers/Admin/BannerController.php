@@ -40,7 +40,7 @@ class BannerController extends Controller
             $data['hero_image'] = $uploadedFile['secure_url'];
         }
         
-        
+        // dd($data);
         Banner::create($data);
         return redirect()->route('banners.index')->with('success', 'Banner created successfully.');
     }

@@ -34,7 +34,7 @@ class GameController extends Controller
             'sale_price' => 'nullable|numeric|min:0',
             'catagory_id' => 'required|exists:catagorys,id',
         ]);
-        dd($data);
+        // dd($data);
         if ($request->hasFile('image_path')) {
             // dd($request->file('image'));
             $image = $request->file('image_path');

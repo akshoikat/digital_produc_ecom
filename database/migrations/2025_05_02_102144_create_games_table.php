@@ -13,16 +13,15 @@ return new class extends Migration
     {
         Schema::create('games', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('category_id');
             $table->string('name');
-            $table->string('description')->nullable();
-            $table->text('full_description')->nullable();
-            $table->string('image_path')->nullable();
-            $table->decimal('regular_price', 10, 2)->default(0);
-            $table->decimal('discount_percentage', 5, 2)->default(0);
-            $table->decimal('sale_price', 10, 2)->default(0);
-          
+            $table->text('description')->nullable();
+            $table->string('logo_path')->nullable();
             $table->timestamps();
+        
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
         });
+        
     }
 
     /**

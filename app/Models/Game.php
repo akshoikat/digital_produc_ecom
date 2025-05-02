@@ -7,13 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Game extends Model
 {
+    
     use HasFactory;
 
 
-    protected $guarded = [
-        'id'
-    ];
+    public function category()
+{
+    return $this->belongsTo(Categori::class);
+}
 
-
- 
+public function topups()
+{
+    return $this->hasMany(Topup::class);
+}
 }
