@@ -19,7 +19,7 @@ class GameController extends Controller
     public function create()
     {
        
-        return view('admin.game.create', compact('catagories'));
+        return view('admin.game.create');
     }
 
     public function store(Request $request){

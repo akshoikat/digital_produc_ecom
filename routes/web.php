@@ -34,11 +34,11 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
 
     Route::resource('banners', BannerController::class);
     Route::resource('features', FeatureController::class);
-    Route::resource('catagorys', CatagoryController::class);
+ 
     Route::resource('games', GameController::class);
     Route::resource('settings', SettingController::class);
     Route::resource('transaction', AdminTranjection::class);
-    Route::resource('topups', TopupController::class);
+
 
 });
 

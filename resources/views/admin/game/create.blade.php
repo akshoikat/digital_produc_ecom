@@ -19,7 +19,7 @@
                                     <label for="name">Game Name</label>
                                     <input type="text" class="form-control form-control-rounded" id="name" name="name" placeholder="Enter Game Name" required>
                                 </div>
-                                <div class="form-group">
+                                {{-- <div class="form-group">
                                     <label for="category_id">Select Category</label>
                                     <select class="form-control form-control-rounded" id="category_id" name="category_id" required>
                                         <option value="">-- Choose Category --</option>
@@ -27,7 +27,7 @@
                                             <option value="{{ $category->id }}">{{ $category->name }}</option>
                                         @endforeach
                                     </select>
-                                </div>
+                                </div> --}}
                                     <div class="form-group">
                                     <label for="regular_price">Regular Price</label>
                                     <input type="number" step="0.01" class="form-control form-control-rounded" id="regular_price" name="regular_price" placeholder="Enter Regular Price">
