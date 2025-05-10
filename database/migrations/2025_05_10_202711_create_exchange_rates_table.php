@@ -11,17 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('games', function (Blueprint $table) {
+        Schema::create('exchange_rates', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('category_id');
-            $table->string('name');
-            $table->text('description')->nullable();
-            $table->string('logo_path')->nullable();
+            $table->decimal('rate', 10, 2);
             $table->timestamps();
-        
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
         });
-        
     }
 
     /**
@@ -29,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('games');
+        Schema::dropIfExists('exchange_rates');
     }
 };

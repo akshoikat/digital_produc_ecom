@@ -3,51 +3,90 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Catagory;
+use App\Models\Category;
 use App\Models\Game;
-use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Http\Request;
 
 class GameController extends Controller
 {
+    // Show games list
     public function index()
     {
-        $games = Game::all();
+        $games = Game::with('category')->get();
         return view('admin.game.index', compact('games'));
     }
 
+    // Show create game form
     public function create()
     {
-       
-        return view('admin.game.create');
+        $categories = Category::all();
+        return view('admin.game.create', compact('categories'));
     }
 
-    public function store(Request $request){
-        $data = $request->validate([
-
+    // Store new game
+    public function store(Request $request)
+    {
+        $request->validate([
             'name' => 'required|string|max:255',
-            'description' => 'nullable|string|max:255',
-            'full_description' => 'nullable|string',
-            'image_path' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048', // assuming file upload
-            'regular_price' => 'required|numeric|min:0',
-            'discount_percentage' => 'nullable|numeric|min:0|max:100',
-            'sale_price' => 'nullable|numeric|min:0',
-            'catagory_id' => 'required|exists:catagorys,id',
+            'logo' => 'required|image|mimes:jpeg,png,jpg,gif',
+            'description' => 'required|string',
+            'category_id' => 'required|exists:categories,id',
         ]);
-        // dd($data);
-        if ($request->hasFile('image_path')) {
-            // dd($request->file('image'));
-            $image = $request->file('image_path');
-            $uploadedFile = Cloudinary::uploadApi()->upload($image->getRealPath());
-            $data['image_path'] = $uploadedFile['secure_url'];
+
+        $game = new Game();
+        $game->name = $request->name;
+        $game->description = $request->description;
+        $game->category_id = $request->category_id;
+
+        // Upload logo image to Cloudinary
+        if ($request->hasFile('logo')) {
+            $game->logo = $request->file('logo')->store('game_logos', 'public');
         }
-        
-        Game::create($data);
 
+        $game->save();
 
+        return redirect()->route('admin.games.index')->with('success', 'Game added successfully');
+    }
 
-        return redirect()->back()->with('success', 'Banner created successfully.');
+    // Show edit game form
+    public function edit($id)
+    {
+        $game = Game::findOrFail($id);
+        $categories = Category::all();
+        return view('admin.games.edit', compact('game', 'categories'));
+    }
 
+    // Update game
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+            'description' => 'required|string',
+            'category_id' => 'required|exists:categories,id',
+        ]);
 
+        $game = Game::findOrFail($id);
+        $game->name = $request->name;
+        $game->description = $request->description;
+        $game->category_id = $request->category_id;
+
+        // Upload logo image to Cloudinary if provided
+        if ($request->hasFile('logo')) {
+            $game->logo = $request->file('logo')->store('game_logos', 'public');
+        }
+
+        $game->save();
+
+        return redirect()->route('admin.games.index')->with('success', 'Game updated successfully');
+    }
+
+    // Delete game
+    public function destroy($id)
+    {
+        $game = Game::findOrFail($id);
+        $game->delete();
+
+        return redirect()->route('admin.games.index')->with('success', 'Game deleted successfully');
     }
 }

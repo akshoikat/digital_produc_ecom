@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique(); 
+            $table->string('name'); // ক্যাটেগরি নাম
+            $table->text('description')->nullable(); // ক্যাটেগরির বর্ণনা
             $table->timestamps();
         });
     }
@@ -23,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('categoris');
+        Schema::dropIfExists('categories');
     }
 };

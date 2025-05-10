@@ -4,24 +4,16 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
-
-
-
-
 use App\Http\Controllers\Admin\BannerController;
-
-use App\Http\Controllers\Admin\CategoriController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ExchangeRateController;
 use App\Http\Controllers\Admin\FeatureController;
 use App\Http\Controllers\Admin\GameController;
-use App\Http\Controllers\Admin\SettingController;
-use App\Http\Controllers\Admin\TranjectionController as AdminTranjection;
-use App\Http\Controllers\Admin\MoneyExchangeController;
-use App\Http\Controllers\Admin\TopupController as AdminTopupController;
-use App\Http\Controllers\TopupController;
+use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\TopUpProductController;
 
 Route::get('/',[HomeController::class,'index'])->name('home'); 
 
-Route::get('exchanege', [MoneyExchangeController::class, 'index'])->name('money.exchange');
 
 
 
@@ -33,15 +25,15 @@ Route::post('/admin/logout', [AuthController::class, 'logout'])->name('admin.log
 Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
 
     Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
-
     Route::resource('banners', BannerController::class);
     Route::resource('features', FeatureController::class);
- 
+    Route::resource('categories', CategoryController::class);
     Route::resource('games', GameController::class);
-    Route::resource('settings', SettingController::class);
-    Route::resource('transaction', AdminTranjection::class);
-    Route::resource('categories', CategoriController::class);
-    Route::resource('topups', AdminTopupController::class);
+    Route::resource('products', TopUpProductController::class);
+    Route::resource('orders', OrderController::class);
+    Route::resource('exchange-rates', ExchangeRateController::class);
+    
+    // Route::resource('settings', SettingsController::class);
 
 
    

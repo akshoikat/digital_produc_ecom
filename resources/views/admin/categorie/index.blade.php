@@ -1,52 +1,35 @@
 @extends('admin.layouts.admin')
 @section('title', 'Banner')
 @section('content')
+<h2 class="text-xl font-bold mb-4">Categories</h2>
+<a href="{{ route('categories.create') }}" class="btn btn-primary mb-4">Add New Category</a>
 
-<div class="container mt-4">
-
-    <div class="form-group">
-        <a href="{{ route('categories.create') }}">
-            <button type="submit" class="btn btn-light btn-round px-5"><i class="icon-lock"></i> Add Game</button>
-        </a>
-      </div>
-    <!-- Banner Create Form -->
-  
-
-    <div class="table-responsive">
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th scope="col">ID</th>
-              <th scope="col">name</th>
-              <th scope="col">options</th>
-              
-            </tr>
-          </thead>
-          <tbody>
-            
-            @foreach ($categories as $cat)
-            <tr>
-              <th scope="row">{{ $cat->id }}</th>
-              <td>{{ $cat->name }}</td>
-              <td>{{ $cat->description }}</td>
-              <td>
-                <form action="{{ route('categories.destroy', $cat->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this Games?');">
-                  @csrf
-                  @method('DELETE')
-                  <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+<table class="table-auto w-full">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Image</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach ($categories as $category)
+        <tr>
+            <td>{{ $category->name }}</td>
+            <td>{{ $category->description }}</td>
+            <td><img src="{{ asset('storage/' . $category->image) }}" alt="Category Image" width="100"></td>
+            <td>
+                <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-info btn-sm">Edit</a>
+                <form action="{{ route('categories.destroy', $category->id) }}" method="POST" style="display:inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button onclick="return confirm('Delete this category?')" class="btn btn-danger btn-sm">Delete</button>
                 </form>
-              </td>
-              
-            </tr>
-            @endforeach
-
-          </tbody>
-        </table>
-      </div>
-      </div>
-    </div>
-  </div>
-
-</div>
+            </td>
+        </tr>
+        @endforeach
+    </tbody>
+</table>
 
 @endsection

@@ -14,11 +14,11 @@
          <i class="zmdi zmdi-view-dashboard"></i> <span>Dashboard</span>
        </a>
      </li>
-     {{-- <li>
+     <!-- {{-- <li>
       <a href="{{ route('users.index') }}">
         <i class="zmdi zmdi-view-dashboard"></i> <span>User</span>
       </a>
-    </li> --}}
+    </li> --}} -->
     <li>
       <a href="{{ route('features.index') }}">
         <i class="zmdi zmdi-view-dashboard"></i> <span>Features</span>
@@ -35,26 +35,26 @@
       </a>
     </li>
     <li>
-      <a href="{{ route('topups.index') }}">
-        <i class="zmdi zmdi-view-dashboard"></i> <span>TopUp</span>
+      <a href="{{ route('products.index') }}">
+        <i class="zmdi zmdi-view-dashboard"></i> <span>Product</span>
       </a>
     </li>
      <li>
         <a href="{{ route('games.index') }}">
-          <i class="zmdi zmdi-view-dashboard"></i> <span>Game Control</span>
+          <i class="zmdi zmdi-view-dashboard"></i> <span>Game </span>
         </a>
       </li>
       <li>
-        <a href="{{ route('transaction.index') }}">
-          <i class="zmdi zmdi-view-dashboard"></i> <span>Transaction List</span>
+        <a href="{{ route('orders.index') }}">
+          <i class="zmdi zmdi-view-dashboard"></i> <span>Order</span>
         </a>
       </li>
       
       
       
       <li>
-        <a href="{{ route('settings.index') }}">
-          <i class="zmdi zmdi-view-dashboard"></i> <span>Setting</span>
+        <a href="{{ route('exchange-rates.index') }}">
+          <i class="zmdi zmdi-view-dashboard"></i> <span>exchange-rates</span>
         </a>
       </li>
       

@@ -5,21 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Game extends Model
+class Category extends Model
 {
-use HasFactory;
+    use HasFactory;
 
     // Fillable properties
     protected $fillable = [
         'name',
-        'logo',
         'description',
-        'category_id',
     ];
 
-    // Relation with Category model
-    public function category()
+    // Relation with Game model (assuming each category has many games)
+    public function games()
     {
-        return $this->belongsTo(Category::class);
+        return $this->hasMany(Game::class);
     }
 }

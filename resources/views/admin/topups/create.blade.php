@@ -1,71 +1,44 @@
 @extends('admin.layouts.admin')
 @section('title', 'Create Top-Up Product')
 @section('content')
+<h2 class="text-xl font-bold mb-4">Add New Top-Up Product</h2>
 
-<div class="container-fluid">
-    <div class="row mt-3">
-        <div class="col-lg-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="card-title">Create New Top-Up Product</div>
-                    <hr>
-
-                    <form action="{{ route('topups.store') }}" method="POST">
-                        @csrf
-                        <div class="row">
-                            <!-- Column 1 -->
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="game_id">Select Game</label>
-                                    <select class="form-control form-control-rounded" name="game_id" id="game_id" required>
-                                        <option value="">Choose Game</option>
-                                        @foreach($games as $game)
-                                            <option value="{{ $game->id }}">{{ $game->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="product_name">Product Name</label>
-                                    <input type="text" class="form-control form-control-rounded" id="product_name" name="product_name" placeholder="e.g. 60 UC" required>
-                                </div>
-                            </div>
-
-                            <!-- Column 2 -->
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="amount">Amount</label>
-                                    <input type="text" class="form-control form-control-rounded" id="amount" name="amount" placeholder="e.g. 60" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="price">Price (BDT/USD)</label>
-                                    <input type="number" step="0.01" class="form-control form-control-rounded" id="price" name="price" placeholder="Enter price" required>
-                                </div>
-                            </div>
-
-                            <!-- Column 3 -->
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="delivery_time">Delivery Time</label>
-                                    <input type="text" class="form-control form-control-rounded" id="delivery_time" name="delivery_time" placeholder="e.g. 10 minutes" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="instructions">Instructions</label>
-                                    <textarea class="form-control form-control-rounded" id="instructions" name="instructions" rows="2" placeholder="Enter instructions..."></textarea>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group text-center mt-3">
-                            <button type="submit" class="btn btn-light btn-round px-5">
-                                <i class="icon-lock"></i> Save Product
-                            </button>
-                        </div>
-
-                    </form>
-                </div>
-            </div>
-        </div>
+<form action="{{ route('products.store') }}" method="POST">
+    @csrf
+    <div class="mb-4">
+        <label for="game_id" class="block">Game</label>
+        <select name="game_id" id="game_id" class="form-select" required>
+            @foreach ($games as $game)
+                <option value="{{ $game->id }}">{{ $game->name }}</option>
+            @endforeach
+        </select>
     </div>
-</div>
 
+    <div class="mb-4">
+        <label for="product_name" class="block">Product Name</label>
+        <input type="text" name="product_name" id="product_name" class="form-input" required>
+    </div>
+
+    <div class="mb-4">
+        <label for="amount" class="block">Amount</label>
+        <input type="number" name="amount" id="amount" class="form-input" required>
+    </div>
+
+    <div class="mb-4">
+        <label for="price" class="block">Price</label>
+        <input type="number" name="price" id="price" class="form-input" required>
+    </div>
+
+    <div class="mb-4">
+        <label for="delivery_time" class="block">Delivery Time</label>
+        <input type="text" name="delivery_time" id="delivery_time" class="form-input" required>
+    </div>
+
+    <div class="mb-4">
+        <label for="instructions" class="block">Instructions</label>
+        <textarea name="instructions" id="instructions" class="form-textarea" required></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save Product</button>
+</form>
 @endsection
