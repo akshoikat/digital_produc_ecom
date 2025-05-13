@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Game;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Http\Request;
 
 class GameController extends Controller
@@ -38,14 +39,15 @@ class GameController extends Controller
         $game->description = $request->description;
         $game->category_id = $request->category_id;
 
-        // Upload logo image to Cloudinary
-        if ($request->hasFile('logo')) {
-            $game->logo = $request->file('logo')->store('game_logos', 'public');
-        }
+            if ($request->hasFile('logo')) {
+                $image = $request->file('logo');
+                $uploadedFile = Cloudinary::uploadApi()->upload($image->getRealPath());
+                $game->logo = $uploadedFile['secure_url']; 
+            }
 
         $game->save();
 
-        return redirect()->route('admin.games.index')->with('success', 'Game added successfully');
+        return redirect()->route('games.index')->with('success', 'Game added successfully');
     }
 
     // Show edit game form
@@ -53,33 +55,11 @@ class GameController extends Controller
     {
         $game = Game::findOrFail($id);
         $categories = Category::all();
-        return view('admin.games.edit', compact('game', 'categories'));
+        return view('games.edit', compact('game', 'categories'));
     }
 
-    // Update game
-    public function update(Request $request, $id)
-    {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif',
-            'description' => 'required|string',
-            'category_id' => 'required|exists:categories,id',
-        ]);
+   
 
-        $game = Game::findOrFail($id);
-        $game->name = $request->name;
-        $game->description = $request->description;
-        $game->category_id = $request->category_id;
-
-        // Upload logo image to Cloudinary if provided
-        if ($request->hasFile('logo')) {
-            $game->logo = $request->file('logo')->store('game_logos', 'public');
-        }
-
-        $game->save();
-
-        return redirect()->route('admin.games.index')->with('success', 'Game updated successfully');
-    }
 
     // Delete game
     public function destroy($id)
@@ -87,6 +67,6 @@ class GameController extends Controller
         $game = Game::findOrFail($id);
         $game->delete();
 
-        return redirect()->route('admin.games.index')->with('success', 'Game deleted successfully');
+        return redirect()->route('games.index')->with('success', 'Game deleted successfully');
     }
 }

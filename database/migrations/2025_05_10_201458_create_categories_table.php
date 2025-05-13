@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('name'); // ক্যাটেগরি নাম
+            $table->string('image'); 
             $table->text('description')->nullable(); // ক্যাটেগরির বর্ণনা
             $table->timestamps();
         });

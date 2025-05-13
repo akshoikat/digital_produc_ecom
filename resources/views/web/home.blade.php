@@ -190,59 +190,44 @@
                 </div>
             </section> --}}
 
-            <section class="jarallax">
-                <img src="{{asset('fontend/images/background/bg2.jpg')}}" class="jarallax-img" alt="">
-                <div class="de-gradient-edge-top"></div>
-                <div class="de-gradient-edge-bottom"></div>
-                <div class="container z-1000">
-                    <div class="row align-items-center">
-                        <div class="col-lg-6">
-                            <div class="subtitle wow fadeInUp mb-3">Top Up</div>
-                            <h2 class="wow fadeInUp mb20" data-wow-delay=".2s">TopUp Your Game</h2>
-                        </div>
-                        <div class="col-lg-6 text-lg-end">
-                            <a class="btn-main mb-sm-30" href="game-server-1.html"><span>View all</span></a>
+<section class="jarallax position-relative">
+    <img src="{{ asset('fontend/images/background/bg2.jpg') }}" class="jarallax-img" alt="">
+    <div class="de-gradient-edge-top"></div>
+    <div class="de-gradient-edge-bottom"></div>
+    <div class="container position-relative z-1000">
+        <div class="row align-items-center mb-4">
+            <div class="col-lg-6">
+                <div class="subtitle wow fadeInUp mb-3">Top Up</div>
+                <h2 class="wow fadeInUp mb-4" data-wow-delay=".2s">TopUp Your Game</h2>
+            </div>
+            <div class="col-lg-6 text-lg-end">
+                <a class="btn btn-primary mb-sm-30" href="game-server-1.html">
+                    <span>View all</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            @foreach($categorys as $category)
+            <div class="col-lg-3 col-md-6 gallery-item">
+                <div class="de-item wow" style="height: 290px;">
+                    <div class="d-overlay">
+                        <div class="d-text">
+                            <a class="btn-main mb10" href="{{ route('category.games', $category->id) }}">
+                                
+                                <span style="color: #fff;">View  {{ $category->name }}</span>
+                            </a>
                         </div>
                     </div>
-                    <div class="row g-4 sequence">
-
-
-                        <div class="row g-4">
-
-
-                            @foreach($games as $game)
-                            <div class="col-lg-3 col-md-6 gallery-item">
-                                <div class="de-item wow">
-                                    <div class="d-overlay">
-                                        <div class="d-label"> -
-                                            {{ $game->discount_percentage ?? 'No Discount' }}
-                                        </div>
-                                        <div class="d-text">
-                                            <h4>{{ $game->title }}</h4>
-                                            <p class="d-price">
-                                                Starting at 
-                                                <span class="price">
-                                                    @if($game->sale_price)
-                                                        BDT {{ number_format($game->sale_price, 2) }}
-                                                    @else
-                                                        BDT {{ number_format($game->regular_price, 2) }}
-                                                    @endif
-                                                </span>
-                                            </p>
-                                            <a class="btn-main btn-fullwidth" href="{{ route('game.index', $game->id ) }}">
-                                                <span>Buye Now</span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <img src="{{ asset($game->image_path) }}" class="img-fluid" alt="{{ $game->title }}">
-                                </div>
-                            </div>
-                            @endforeach
-                        </div>
-
-                    </div>
+                    <a href="{{ route('category.games', $category->id) }}">
+                        <img src="{{ asset($category->image) }}" class="img-fluid" alt="{{ $category->name }}">
+                    </a>
                 </div>
-            </section>             
+            </div>
+            @endforeach
+        </div>
+    </div>
+</section>             
 
             {{-- <section class="no-top no-bottom">
                 <div class="container">

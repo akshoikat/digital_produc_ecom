@@ -1,26 +1,65 @@
 @extends('admin.layouts.admin')
-@section('title', 'Game Create')
+@section('title', 'Create Category')
 @section('content')
 
-<h2 class="text-xl font-bold mb-4">Add New Category</h2>
+<div class="row mt-3">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="card-title">Add New Category</div>
+                <hr>
 
-<form action="{{ route('categories.store') }}" method="POST" enctype="multipart/form-data">
-    @csrf
-    <div class="mb-4">
-        <label for="name" class="block">Category Name</label>
-        <input type="text" name="name" id="name" class="form-input" required>
+                <form action="{{ route('categories.store') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="row">
+                        <!-- First Column (50%) -->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="name">Category Name <span class="text-danger">*</span></label>
+                                <input type="text" name="name" id="name" class="form-control" placeholder="Enter category name" required value="{{ old('name') }}">
+                                @error('name')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
+                                <label for="image">Image <span class="text-danger">*</span></label>
+                                <input type="file" name="image" id="image" class="form-control" placeholder="Enter category name" required value="{{ old('name') }}">
+                                @error('image')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            
+                        </div>
+
+                        <!-- Second Column (50%) -->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="description">Description</label>
+                                <textarea name="description" id="description" class="form-control" rows="3" placeholder="Short description...">{{ old('description') }}</textarea>
+                                @error('description')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <div class="icheck-material-white">
+                            <input type="checkbox" id="agree_terms" name="agree_terms" checked=""/>
+                            <label for="agree_terms">I Agree to the Terms & Conditions</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group text-center">
+                        <button type="submit" class="btn btn-light px-5">
+                            <i class="bi bi-save me-1"></i> Save Category
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
+</div>
 
-    <div class="mb-4">
-        <label for="description" class="block">Description</label>
-        <textarea name="description" id="description" class="form-textarea"></textarea>
-    </div>
-
-    <div class="mb-4">
-        <label for="image" class="block">Image (optional)</label>
-        <input type="file" name="image" id="image" class="form-input">
-    </div>
-
-    <button type="submit" class="btn btn-primary">Save Category</button>
-</form>
 @endsection

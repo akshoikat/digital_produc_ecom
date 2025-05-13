@@ -13,10 +13,30 @@ class CategorySeeder extends Seeder
      */
     public function run(): void
     {
-        $categories = ['PUBG', 'Free Fire', 'Mobile Legends', 'Valorant'];
-
+        $categories = [
+            [
+                'name' => 'PUBG',
+                'image' => 'https://example.com/images/pubg.png',
+                'description' => 'PlayerUnknown’s Battlegrounds (PUBG) is a battle royale game.'
+            ],
+            [
+                'name' => 'Free Fire',
+                'image' => 'https://example.com/images/freefire.png',
+                'description' => 'Free Fire is a fast-paced battle royale game available on mobile.'
+            ],
+            [
+                'name' => 'Mobile Legends',
+                'image' => 'https://example.com/images/mobilelegends.png',
+                'description' => 'Mobile Legends: Bang Bang is a multiplayer online battle arena (MOBA) game.'
+            ],
+            [
+                'name' => 'Valorant',
+                'image' => 'https://example.com/images/valorant.png',
+                'description' => 'Valorant is a free-to-play first-person hero shooter developed by Riot Games.'
+            ]
+        ];
         foreach ($categories as $category) {
-            Category::updateOrCreate(['name' => $category]);
+            Category::create($category);
+        }
     }
-}
 }

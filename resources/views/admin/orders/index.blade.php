@@ -1,11 +1,17 @@
 @extends('admin.layouts.admin')
 @section('title', 'Banner')
 @section('content')
-<h2 class="text-xl font-bold mb-4">Orders</h2>
 
-<table class="table-auto w-full">
-    <thead>
-        <tr>
+<div class="card">
+  <div class="card-header">
+    <h5 class="mb-0">Orders</h5>
+  </div>
+
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover align-middle">
+        <thead class="table-light">
+          <tr>
             <th>#</th>
             <th>User</th>
             <th>Game</th>
@@ -13,27 +19,35 @@
             <th>Amount</th>
             <th>Status</th>
             <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach ($orders as $order)
-        <tr>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach ($orders as $order)
+          <tr>
             <td>{{ $order->id }}</td>
-            <td>{{ $order->user->name }}</td>
-            <td>{{ $order->game->name }}</td>
-            <td>{{ $order->product->product_name }}</td>
+            <td>{{ $order->user->name ?? 'N/A' }}</td>
+            <td>{{ $order->game->name ?? 'N/A' }}</td>
+            <td>{{ $order->product->product_name ?? 'N/A' }}</td>
             <td>{{ $order->amount }} BDT</td>
-            <td>{{ $order->status }}</td>
             <td>
-                <a href="{{ route('admin.orders.show', $order->id) }}" class="btn btn-info btn-sm">View</a>
-                <form action="{{ route('admin.orders.destroy', $order->id) }}" method="POST" style="display:inline;">
-                    @csrf
-                    @method('DELETE')
-                    <button onclick="return confirm('Delete this order?')" class="btn btn-danger btn-sm">Delete</button>
-                </form>
+              <span class="badge bg-{{ $order->status == 'pending' ? 'warning' : ($order->status == 'completed' ? 'success' : 'secondary') }}">
+                {{ ucfirst($order->status) }}
+              </span>
             </td>
-        </tr>
-        @endforeach
-    </tbody>
-</table>
+            <td>
+              <a href="{{ route('admin.orders.show', $order->id) }}" class="btn btn-sm btn-info">View</a>
+              <form action="{{ route('admin.orders.destroy', $order->id) }}" method="POST" class="d-inline-block" onsubmit="return confirm('Delete this order?')">
+                @csrf
+                @method('DELETE')
+                <button class="btn btn-sm btn-danger">Delete</button>
+              </form>
+            </td>
+          </tr>
+          @endforeach
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
 @endsection

@@ -19,9 +19,9 @@
                         </div>
                     </div>
                     <div class="de-flex-col header-col-mid">
-                        <ul id="mainmenu">
+                        <!-- <ul id="mainmenu">
                             <li><a class="menu-item" href="index.html">Home</a></li>
-                        </ul>
+                        </ul> -->
                     </div>
                     <div class="de-flex-col">
                         <div class="menu_side_area">

@@ -12,6 +12,7 @@ class Category extends Model
     // Fillable properties
     protected $fillable = [
         'name',
+        'image',
         'description',
     ];
 
@@ -20,4 +21,7 @@ class Category extends Model
     {
         return $this->hasMany(Game::class);
     }
+
+
+
 }

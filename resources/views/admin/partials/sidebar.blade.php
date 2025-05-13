@@ -34,16 +34,17 @@
         <i class="zmdi zmdi-view-dashboard"></i> <span>Catagory</span>
       </a>
     </li>
-    <li>
-      <a href="{{ route('products.index') }}">
-        <i class="zmdi zmdi-view-dashboard"></i> <span>Product</span>
-      </a>
-    </li>
+    
      <li>
         <a href="{{ route('games.index') }}">
           <i class="zmdi zmdi-view-dashboard"></i> <span>Game </span>
         </a>
       </li>
+      <li>
+      <a href="{{ route('products.index') }}">
+        <i class="zmdi zmdi-view-dashboard"></i> <span>Product</span>
+      </a>
+    </li>
       <li>
         <a href="{{ route('orders.index') }}">
           <i class="zmdi zmdi-view-dashboard"></i> <span>Order</span>

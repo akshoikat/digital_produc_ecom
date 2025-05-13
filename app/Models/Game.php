@@ -22,4 +22,8 @@ use HasFactory;
     {
         return $this->belongsTo(Category::class);
     }
+    public function products()
+    {
+        return $this->hasMany(TopUpProduct::class);
+    }
 }

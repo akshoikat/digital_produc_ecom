@@ -14,16 +14,38 @@ class GameSeeder extends Seeder
      */
     public function run(): void
     {
-        $pubg = Category::where('name', 'PUBG')->first();
-
-        Game::updateOrCreate(
-            ['name' => 'PUBG Mobile'],
+       
+        $games = [
             [
-                'category_id' => $pubg->id,
-                'description' => 'Top-up your PUBG UC',
-                'logo' => 'https://via.placeholder.com/100'
-            ]
-        );
+                'name' => 'PUBG Mobile',
+                'logo' => 'https://example.com/logos/pubg.png',
+                'description' => 'PUBG Mobile is a popular battle royale game.',
+                'category_id' => 1,
+            ],
+            [
+                'name' => 'Free Fire',
+                'logo' => 'https://example.com/logos/freefire.png',
+                'description' => 'Free Fire is a survival shooter game available on mobile.',
+                'category_id' => 2,
+            ],
+            [
+                'name' => 'Mobile Legends',
+                'logo' => 'https://example.com/logos/mlbb.png',
+                'description' => 'Mobile Legends is a 5v5 MOBA game.',
+                'category_id' => 3,
+            ],
+            [
+                'name' => 'Valorant',
+                'logo' => 'https://example.com/logos/valorant.png',
+                'description' => 'Valorant is a tactical shooter by Riot Games.',
+                'category_id' => 4,
+            ],
+        ];
+
+        foreach ($games as $game) {
+            Game::create($game);
+        }
+       
     }
 }
 

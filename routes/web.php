@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\FeatureController;
 use App\Http\Controllers\Admin\GameController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\TopUpProductController;
+use App\Http\Controllers\GameDettailsController;
 
 Route::get('/',[HomeController::class,'index'])->name('home'); 
 
@@ -20,6 +21,12 @@ Route::get('/',[HomeController::class,'index'])->name('home');
 Route::get('/admin/login', [AuthController::class, 'showLoginForm'])->name('admin.login');
 Route::post('/admin/login', [AuthController::class, 'login'])->name('admin.login.submit');
 Route::post('/admin/logout', [AuthController::class, 'logout'])->name('admin.logout');
+
+
+
+Route::get('/category/{id}/games', [GameDettailsController::class, 'categoryGames'])->name('category.games');
+Route::get('/game/{id}/products', [GameDettailsController::class, 'gameProducts'])->name('game.products');
+
 
 
 Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {

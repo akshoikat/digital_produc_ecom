@@ -15,13 +15,6 @@ class OrderController extends Controller
         return view('admin.orders.index', compact('orders'));
     }
 
-    // Show order details
-    public function show($id)
-    {
-        $order = Order::with(['user', 'game', 'product'])->findOrFail($id);
-        return view('admin.orders.show', compact('order'));
-    }
-
     // Update order status (complete/cancel)
     public function update(Request $request, $id)
     {
@@ -29,7 +22,7 @@ class OrderController extends Controller
         $order->status = $request->status;
         $order->save();
 
-        return redirect()->route('admin.orders.index')->with('success', 'Order status updated');
+        return redirect()->route('orders.index')->with('success', 'Order status updated');
     }
 
     // Delete order
@@ -38,6 +31,6 @@ class OrderController extends Controller
         $order = Order::findOrFail($id);
         $order->delete();
 
-        return redirect()->route('admin.orders.index')->with('success', 'Order deleted');
+        return redirect()->route('orders.index')->with('success', 'Order deleted');
     }
 }

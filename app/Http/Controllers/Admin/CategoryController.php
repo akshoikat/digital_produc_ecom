@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -34,22 +35,22 @@ class CategoryController extends Controller
         $category->name = $request->name;
         $category->description = $request->description;
 
-        // Image upload
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('categories', 'public');
-            $category->image = $imagePath;
-        }
+                $image = $request->file('image');
+                $uploadedFile = Cloudinary::uploadApi()->upload($image->getRealPath());
+                $category->image = $uploadedFile['secure_url']; 
+            }
 
         $category->save();
 
-        return redirect()->route('admin.categories.index')->with('success', 'Category added successfully');
+        return redirect()->route('categories.index')->with('success', 'Category added successfully');
     }
 
     // Show edit category form
     public function edit($id)
     {
         $category = Category::findOrFail($id);
-        return view('admin.categories.edit', compact('category'));
+        return view('categories.edit', compact('category'));
     }
 
     // Update category
@@ -73,7 +74,7 @@ class CategoryController extends Controller
 
         $category->save();
 
-        return redirect()->route('admin.categories.index')->with('success', 'Category updated successfully');
+        return redirect()->route('categories.index')->with('success', 'Category updated successfully');
     }
 
     // Delete category
@@ -82,6 +83,6 @@ class CategoryController extends Controller
         $category = Category::findOrFail($id);
         $category->delete();
 
-        return redirect()->route('admin.categories.index')->with('success', 'Category deleted successfully');
+        return redirect()->route('categories.index')->with('success', 'Category deleted successfully');
     }
 }
