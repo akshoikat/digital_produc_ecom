@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('top_up_products', function (Blueprint $table) {
             $table->id();
-              $table->foreignId('game_id')->constrained()->onDelete('cascade'); // গেমের সাথে সম্পর্কিত
+            $table->foreignId('game_id')->constrained()->onDelete('cascade'); 
             $table->string('product_name');
-            $table->decimal('amount', 8, 2); // পরিমাণ (যেমন UC বা অন্যান্য)
-            $table->decimal('price', 8, 2); // প্রাইজ (BDT/USD)
-            $table->string('delivery_time'); // ডেলিভারি সময়
-            $table->text('instructions'); // নির্দেশনা
+            $table->decimal('amount', 8, 2); 
+            $table->decimal('price', 8, 2); 
+            $table->string('delivery_time'); 
+            $table->text('instructions');
             $table->timestamps();
         });
     }

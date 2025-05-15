@@ -25,8 +25,7 @@ Route::post('/admin/logout', [AuthController::class, 'logout'])->name('admin.log
 
 
 Route::get('/category/{id}/games', [GameDettailsController::class, 'categoryGames'])->name('category.games');
-Route::get('/game/{id}/products', [GameDettailsController::class, 'gameProducts'])->name('game.products');
-
+Route::get('/order/product/{id}', [GameDettailsController::class, 'gameProducts'])->name('game.products');
 
 
 Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {

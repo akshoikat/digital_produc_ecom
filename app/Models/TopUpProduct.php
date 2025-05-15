@@ -10,6 +10,7 @@ class TopUpProduct extends Model
    use HasFactory;
 
     protected $fillable = [
+        
         'game_id',
         'product_name',
         'amount',

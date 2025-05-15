@@ -24,6 +24,6 @@ use HasFactory;
     }
     public function products()
     {
-        return $this->hasMany(TopUpProduct::class);
+        return $this->hasOne(TopUpProduct::class);
     }
 }
