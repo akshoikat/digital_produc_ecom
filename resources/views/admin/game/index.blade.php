@@ -27,7 +27,7 @@
             <td>{{ $game->category->name ?? 'N/A' }}</td>
             <td>
               @if ($game->logo)
-                <img src="{{ asset('storage/' . $game->logo) }}" alt="Game Logo" width="60">
+                <img src="{{ $game->logo }}" alt="Game Logo" width="60">
               @else
                 <span class="text-muted">No Logo</span>
               @endif

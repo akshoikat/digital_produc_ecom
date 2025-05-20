@@ -10,13 +10,14 @@ class Order extends Model
    use HasFactory;
 
     protected $fillable = [
-        'user_id',
-        'game_id',
-        'product_id',
-        'game_user_id',
+        'email',
+        'game_uid',
+        'sender_number',
+        'transaction_id',
         'payment_method',
-        'amount',
-        'transaction_screenshot',
+        'product_id',
+        'game_id',
+        'price',
         'status',
     ];
 
@@ -32,9 +33,9 @@ class Order extends Model
         return $this->belongsTo(Game::class);
     }
 
-    // Relation with TopUpProduct
+
     public function product()
-    {
-        return $this->belongsTo(TopUpProduct::class);
-    }
+{
+    return $this->belongsTo(TopUpProduct::class, 'product_id');
+}
 }

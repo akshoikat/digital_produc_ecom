@@ -26,7 +26,7 @@
             <td>{{ $category->description }}</td>
             <td>
               @if ($category->image)
-                <img src="{{ asset('storage/' . $category->image) }}" alt="Category Image" width="80">
+                <img src="{{ $category->image }}" alt="Category Image" width="80">
               @else
                 <span class="text-muted">No Image</span>
               @endif

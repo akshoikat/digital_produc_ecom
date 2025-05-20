@@ -10,6 +10,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport" >
     <meta content="Playhost - Game Hosting Website Template" name="description" >
     <meta content="" name="keywords" >
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta content="SRBThemes" name="author" >
     <!-- CSS Files
     ================================================== -->

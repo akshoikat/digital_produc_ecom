@@ -24,4 +24,5 @@ class TopUpProduct extends Model
     {
         return $this->belongsTo(Game::class);
     }
+    
 }

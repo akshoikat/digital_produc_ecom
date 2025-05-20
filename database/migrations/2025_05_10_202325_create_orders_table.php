@@ -13,15 +13,20 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('game_id')->constrained()->onDelete('cascade');
-            $table->foreignId('top_up_product_id')->constrained()->onDelete('cascade');
-            $table->string('game_user_id');
+            $table->string('email');
+            $table->string('game_uid');
+            $table->string('sender_number');
+            $table->string('transaction_id');
             $table->string('payment_method');
-            $table->decimal('amount', 8, 2);
-            $table->string('transaction_screenshot')->nullable();
-            $table->enum('status', ['pending', 'completed', 'cancelled'])->default('pending');
+            $table->unsignedBigInteger('top_up_product_id');
+            $table->unsignedBigInteger('game_id');
+            $table->decimal('price', 10, 2);
+            $table->string('status')->default('pending');
             $table->timestamps();
+
+           $table->foreignId('product_id')->constrained('top_up_products')->onDelete('cascade');
+
+            $table->foreign('game_id')->references('id')->on('games')->onDelete('cascade');
         });
     }
 
